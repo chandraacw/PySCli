@@ -28,7 +28,7 @@ pip install -r requirements.txt
 python PySCli.py -h
 ```
 
-## Usage
+## Penggunaan
 
 ```bash
 > python PySCli.py -h
