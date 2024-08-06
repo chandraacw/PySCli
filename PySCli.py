@@ -31,7 +31,7 @@ parser.add_argument("-v","--version", action="version",version=f"%(prog)s {__ver
 
 def download_vid(url,save=False,no_thumbnail=False):
   yt = YouTube(url)
-  if os.path.exists(os.path.join(save,yt.title+".mp4")):
+  if os.path.exists(os.path.join(save,f"{yt.title}.mp4")):
     print("Video file is already exist. Terminating Download...")
     exit()
   print("\n Detected type [Video], Downloading\n")
@@ -40,7 +40,7 @@ def download_vid(url,save=False,no_thumbnail=False):
   streams = yt.streams.filter(progressive=True,file_extension="mp4")
   highest = [streams.get_highest_resolution()]
   for i in tqdm(highest):
-    highest[0].download(output_path=save)
+    highest[0].download(output_path=save,filename=f"{yt.title}.mp4")
   print(f"\n Downloaded Video [{yt.title}] (mp4)")
   sleep(3)
   if no_thumbnail == False:
@@ -53,7 +53,7 @@ def download_vid(url,save=False,no_thumbnail=False):
 
 def download_aud(url,save=False,no_thumbnail=False):
   yt = YouTube(url)
-  if os.path.exists(os.path.join(save,yt.title+".mp3")):
+  if os.path.exists(os.path.join(save,f"{yt.title}.mp3")):
     print("Audio file is already exist. Terminating Download...")
     exit()
   print("\n Detected type [Audio], Downloading\n")
@@ -61,10 +61,7 @@ def download_aud(url,save=False,no_thumbnail=False):
     save = os.getcwd()
   streams = [yt.streams.get_audio_only()]
   for i in tqdm(streams):
-    streams[0].download(output_path=save)
-    old = os.path.join(save,f"{yt.title}.mp4")
-    new = os.path.join(save,f"{yt.title}.mp3")
-    os.rename(old,new)
+    streams[0].download(output_path=save,filename=f"{yt.title}.mp3")
   print(f"\n Downloaded Video [{yt.title}] (mp3)")
   sleep(3)
   if no_thumbnail == False:
