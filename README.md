@@ -1,4 +1,4 @@
-<p align="center">[![Support The Creator](https://img.shields.io/badge/Support-The-Creator-green)](https://saweria.co/AryaChandra)</p>
+[![Support The Creator](https://img.shields.io/badge/Support_The-Creator-green?style=flat)](https://saweria.co/AryaChandra) [![Made using PyTube](https://img.shields.io/badge/Made_using-PyTube-blue?style=flat)](https://pypi.org/project/pytube)
 
 # **PySCli**
 
