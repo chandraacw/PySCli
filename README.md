@@ -1,3 +1,5 @@
+<p align="center">[![Support The Creator](https://img.shields.io/badge/Support-The-Creator-green)](https://saweria.co/AryaChandra)</p>
+
 # **PySCli**
 
 PySCli adalah sebuah CLI Tools yang digunakan untuk mendownload video atau audio dari YouTube dengan bantuan [PyTube](https://pypi.org/project/pytube) namun saya menggunakan [PyTubeFix](https://pypi.org/project/pytubefix).
