@@ -7,6 +7,8 @@
 ##/_/    \__, //____/\____/_/_/    ##                                   ##
 ##      /____/                     ##           -  Chandra  -           ##
 ##########################################################################
+
+# FIXES BY ANGGI ANANDA
 from pytubefix import YouTube
 from time import sleep
 import os
@@ -58,7 +60,7 @@ def download_vid(url,save,type,no_thumbnail=False):
         f.write(content)
     print(f"\n Downloaded Thumbnail [{yt.title}] (jpg)")
 
-#Multiple fungsi untuk tujuan yang sama
+# Multiple fungsi untuk tujuan yang sama
 
 # def download_aud(url,save=False,no_thumbnail=False):
 #   yt = YouTube(url)
@@ -82,13 +84,13 @@ def download_vid(url,save,type,no_thumbnail=False):
 
 # Penggunaan buruk fungsi
 
-#def check_options(opt):
-#  if opt.lower() == "video":
-#    return "video"
-#  elif opt.lower() == "audio":
-#    return "audio"
-#  else:
-#    return None
+# def check_options(opt):
+#   if opt.lower() == "video":
+#     return "video"
+#   elif opt.lower() == "audio":
+#     return "audio"
+#   else:
+#     return None
 
 def main():
   args = parser.parse_args()
@@ -98,7 +100,8 @@ def main():
   if args.opath != os.getcwd():
     path = os.path.join(os.getcwd(),args.opath)
 
-  #Minor unoptimized code and bug / bad syntax
+  # Minor unoptimized code and causing bug / bad syntax
+  # Sedikit kode tidak teroptimisasi dan memicu bug / sintaks buruk
   if args.typen:
     download_vid(args.url,save=path,type=args.typen,no_thumbnail=thumb)
 
