@@ -23,7 +23,7 @@ from datetime import datetime as dt
 now = dt.now()
 
 ### Silly Version Variable :3 ###
-__get_version__ = [now.strftime("%Y"),now.strftime("%m"),now.strftime("%d")+" 1.0.0"]
+__get_version__ = [now.strftime("%Y"),now.strftime("%m"),now.strftime("%d")+" 1.1.2"]
 __version__ = '/'.join(__get_version__)
 
 #Fix some argument error and bad code
