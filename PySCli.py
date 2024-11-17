@@ -10,11 +10,13 @@
 
 # FIXES BY ANGGI ANANDA
 from pytubefix import YouTube
+from pytubefix.cli import on_progress
 from time import sleep
 import os
 from requests import get
 import pathlib
 import argparse
+import sys
 from tqdm import tqdm
 from datetime import datetime as dt
 
@@ -33,31 +35,35 @@ parser.add_argument("-N","--no-thumbnail",help="Download Thumbnail Exception",ac
 parser.add_argument("-v","--version", action="version",version=f"%(prog)s {__version__}")
 
 def download_vid(url,save,type,no_thumbnail=False):
-  yt = YouTube(url)
-  if type.lower() == "video":
-    base = "Video"
-    fex = "mp4"
-  elif type.lower() == "audio":
-    base = "Audio"
-    fex = "mp3"
+  yt = YouTube(url, on_progress_callback=on_progress)
+  base = "Video" if type.lower() == "video" else "Audio"
+  fex = "mp4" if type.lower() == "video" else "mp3"
   if os.path.exists(os.path.join(save,f"{yt.title}.{fex}")):
     print(f"{base} file is already exist. Terminating Download...")
     exit()
   print(f"\n Detected type [{base}], Downloading\n")
   if type.lower() == "video":
-    streams = [yt.streams.filter(progressive=True,file_extension=fex).get_highest_resolution()]
+    stream = yt.streams.filter(progressive=True,file_extension=fex).get_highest_resolution()
   elif type.lower() == "audio":
-    streams = [yt.streams.get_audio_only()]
-  for i in tqdm(streams):
-    streams[0].download(output_path=save,filename=f"{yt.title}.{fex}")
-  print(f"\n Downloaded {base} [{yt.title}] ({fex})")
+    stream = yt.streams.filter(only_audio=True).first()
+  stream.download(output_path=save,filename=f"{yt.title}")
+  print(f"\n\n Downloaded {base} [{yt.title}] ({fex})")
   sleep(3)
   if no_thumbnail == False:
-    print("\nDetected Thumbnail is True... Downloading")
-    for i in tqdm(range(1)):
-      content = get(yt.thumbnail_url).content
-      with open(os.path.join(save,f"{yt.title}_Thumbnail.jpg"),"wb") as f:
-        f.write(content)
+    print("\n Detected Thumbnail is True... Downloading\n")
+    responses = get(yt.thumbnail_url, stream=True)
+    total = int(responses.headers.get('content-length',0))
+
+    with open(os.path.join(save,f"{yt.title}_Thumbnail.jpg"),"wb") as f, tqdm(
+        desc="Downloading Thumbnail",
+        total=total,
+        unit="kB",
+        unit_scale=True,
+        unit_divisor=1024
+    ) as bar:
+      for data in responses.iter_content(chunk_size=1024):
+        size = f.write(data)
+        bar.update(size)
     print(f"\n Downloaded Thumbnail [{yt.title}] (jpg)")
 
 # Multiple fungsi untuk tujuan yang sama
