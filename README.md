@@ -33,11 +33,22 @@ pip install -r requirements.txt
 python PySCli.py -h
 ```
 
+Untuk Mengsetup Executable, Lakukan.
+
+```bash
+> python3 setup_bin.py
+WARNING: TERMUX & LINUX ENVIRONTMENT ONLY
+Please Choose Number:
+1. Copy
+2. Symbolic Link
+>
+```
+
 ## Penggunaan
 
 ```bash
-> python PySCli.py -h
-usage: PyTube Simple CLI [-h] [-t TYPEN] [-o OPATH] [-N] [-v] url
+> python3 PySCli.py -h
+usage: PyTube Simple CLI [-h] [-t {video,audio}] [-o OPATH] [-N] [-v] url
 
 Simple and Neat PyTube CLI Tools
 
@@ -46,29 +57,28 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  -t TYPEN, --type TYPEN
+  -t {video,audio}, --type {video,audio}
                         Type to be Downloaded (video/audio)
   -o OPATH, --output-path OPATH
-                        Output path for installed video/audio (Default is
-                        CWD)
+                        Output path for installed video/audio (Default is CWD)
   -N, --no-thumbnail    Download Thumbnail Exception
   -v, --version         show program's version number and exit
 
-2024/08/04, 16:39:4
+2024/11/21, 10:27:37
 
-> python PySCli.py https://youtu.be/xX7xWEh6ujk\?si\=r9sjcuOeQR0d7inY -o Output_Folder
+> python3 PySCli.py -t video -o . https://youtu.be/T3bxbVGWy5k?si=RrZiXJA1ECnM-bKC
 
-Detected type [Video], Downloading
+ Detected type [Video], Downloading
 
-100%|███████████████████████████████████████████| 1/1 [00:31<00:00, 31.86s/it]
+ ↳ |████████████████████████████████████████████████| 100.0%
 
- Downloaded Video [Sparkle - Your Name【 Kimi no Na wa. 】AMV] (mp4)
+ Downloaded Video [Galileo Galilei - Aoi Shiori] (mp4)
 
-Detected Thumbnail is True... Downloading
-100%|███████████████████████████████████████████| 1/1 [00:00<00:00,  2.65it/s]
+ Detected Thumbnail is True... Downloading
 
- Downloaded Thumbnail [Sparkle - Your Name【 Kimi no Na wa. 】AMV] (jpg)
->
+Downloading Thumbnail: 100%|██████████████████████| 23.3k/23.3k [00:00<00:00, 6.07MkB/s]
+
+ Downloaded Thumbnail [Galileo Galilei - Aoi Shiori] (jpg)
 ```
 
 ## Kontribusi
