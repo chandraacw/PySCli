@@ -46,7 +46,14 @@ def download_vid(url,save,type,no_thumbnail=False):
     stream = yt.streams.filter(progressive=True,file_extension=fex).get_highest_resolution()
   elif type.lower() == "audio":
     stream = yt.streams.filter(only_audio=True).first()
-  stream.download(output_path=save,filename=f"{yt.title}")
+  if stream is None:
+    print("\n\n No streams available for this url")
+    exit()
+  downloaded_title = stream.download(output_path=save,filename=f"{yt.title}")
+  base_original, fex_original = os.path.splitext(downloaded_title)
+  # print(f"Info : {downloaded_title}, {base_original}, {fex_original}")
+  if fex_original != "mp3" and type.lower() == "audio":
+    os.rename(downloaded_title, base_original + ".mp3")
   print(f"\n\n Downloaded {base} [{yt.title}] ({fex})")
   sleep(3)
   if no_thumbnail == False:
