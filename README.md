@@ -24,7 +24,7 @@ Gunakan [git](https://git-scm.com/download/linux) untuk copy repository.
 ```bash
 apt install git
 
-git clone https://github.com/LezhinPTAD/PySCli
+git clone https://github.com/chandraacw/PySCli
 
 cd PySCli
 
